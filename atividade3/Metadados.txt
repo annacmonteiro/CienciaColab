@@ -1,0 +1,71 @@
+
+METADADOS DO SCRIPT: Ocorrências da espécie Paracanthurus hepatus (GBIF + OBIS)
+
+Objetivo:
+Compilar, limpar, verificar e mapear ocorrências georreferenciadas da espécie Paracanthurus hepatus (peixe-Dory) a partir de duas grandes bases de dados globais: GBIF e OBIS, com foco em eliminar erros geoespaciais, registros duvidosos e ocorrências fora da distribuição conhecida da espécie.
+
+Fontes de dados:
+- GBIF (rgbif): registros obtidos via occ_data().
+- OBIS (robis): registros obtidos via occurrence().
+
+Etapas do processamento
+
+1. Download dos dados
+- Coletados dados de ocorrência da espécie com coordenadas válidas.
+- Extração dos campos mais relevantes: nome científico, coordenadas, profundidade, base de dados, etc.
+
+2. Filtragem inicial (GBIF)
+- Remoção de registros com coordenadas ausentes ou problemas geoespaciais.
+- Eliminação de duplicatas (distinct()).
+- Análise das variáveis categóricas, como waterBody e datasetName.
+
+3. Verificação e limpeza geográfica (GBIF)
+- Checagem de coordenadas inválidas com bdc e CoordinateCleaner.
+- Remoção de registros localizados:
+  - No Atlântico e Caribe (fora da distribuição natural da espécie).
+  - Provenientes do dataset "Diveboard" (considerado inconsistente após inspeção).
+
+4. Filtragem por latitude e profundidade (GBIF)
+- Foco em ocorrências tropicais e rasas (condizentes com habitats recifais).
+
+5. Mapas (GBIF)
+- Geração de mapas com ggplot2, usando geom_polygon() e pontos coloridos por waterBody.
+- Plotagem de histograma da profundidade por waterBody.
+
+6. Processamento de dados OBIS
+- Seleção e limpeza de colunas semelhantes às do GBIF.
+- Filtragem por:
+  - Flags de erro (flags)
+  - Dataset válido
+  - Ocorrências fora do Atlântico
+
+7. Mapas (OBIS)
+- Visualização das ocorrências filtradas em mapa.
+
+8. União dos dados GBIF + OBIS
+- Harmonização de colunas.
+- Marcação da origem (repo).
+- Criação de coluna datasetName a partir do prefixo (gbif ou obis).
+- Dataset final salvo em data/occ_GBIF-OBIS_par_hepa.csv.
+
+9. Análise de outliers espaciais
+- Cálculo da distância de cada ponto ao centroide da distribuição.
+- Classificação em:
+  - OK
+  - "check > Q90"
+  - "check > Q95"
+- Geração de mapa com pontos classificados.
+
+10. Validação final com CoordinateCleaner
+- Aplicação de filtros adicionais (equal, gbif, zeros, seas) para identificar ocorrências potencialmente duvidosas.
+- Geração de mapa destacando apenas registros com alguma bandeira de suspeita.
+
+Pacotes utilizados:
+- rgbif, robis, bdc, CoordinateCleaner, geosphere
+- dplyr, ggplot2, tidyr, tibble
+- maps, mapdata, ggmap
+
+Saída final:
+- CSV com registros limpos e validados: data/occ_GBIF-OBIS_par_hepa.csv
+- Vários gráficos de distribuição geográfica e profundidade
+- Mapas com destaque para outliers e registros suspeitos
