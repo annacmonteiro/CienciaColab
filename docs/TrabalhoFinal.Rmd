@@ -4,7 +4,8 @@ author: "Anna Monteiro"
 date: "2025-06-20"
 output:
   html_document:
-    self_contained: false
+    self_contained: true
+    theme:flatly
 ---
 
 
