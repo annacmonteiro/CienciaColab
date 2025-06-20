@@ -154,14 +154,14 @@ ggplot() +
 # Checar distribuição das ocorrências
 Excluir dados em terra: Checar a distribuição das ocorrências em relação às regiões oceanográficas indicadas nos dados (waterBody). Isso vale apenas para o OBIS.
 
-Investigar níveis suspeitos:
+Investigar níveis suspeitos manipulando a coluna waterBody (corpos d'agua) dos dados:
 ```{r}
 dori_gbif1 %>% 
   distinct(waterBody) %>% 
   pull()
 ```
 
-Função waterBody
+Identificando os erros possíveis das localidades registradas:
 ```{r}
 dori_gbif1 %>%
   group_by(waterBody) %>% 
