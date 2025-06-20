@@ -99,7 +99,7 @@ lapply(dori_gbif1, unique)
 # Problemas não reportados
 Processo de checagem mais fina que não é realizada pelo algoritmo devido sua limitação de programação. 
 
-Inicialmente, podemos verificar se as coordenadas são válidas (e.g., latitudes > 90 ou longitude > 180) utilizando funções dos pacotes CoordinateCleaner e bcd. Clicando nos links dos pacotes vocês podem checar diversas outras funcionalidades oferecidas.
+Inicialmente, podemos verificar se as coordenadas são válidas (e.g., latitudes > 90 ou longitude > 180) utilizando funções dos pacotes CoordinateCleaner e bcd. 
 
 Para checar coordenadas válidas:
 ```{r}
