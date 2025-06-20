@@ -84,10 +84,8 @@ dori_gbif1 <- dori_gbif$data %>%
 
 Para vermos quantas ocorrências são únicas, aplicamos a função distinct do pacote dplyr.
 ```{r}
-dori_gbif1 <- dori_gbif$data %>%
-  dplyr::select(scientificName, acceptedScientificName, decimalLatitude, decimalLongitude,
-         issues, waterBody, basisOfRecord, occurrenceStatus, rightsHolder, 
-         datasetName, recordedBy, depth, locality, habitat) 
+dori_gbif1 <- dori_gbif1 %>% 
+  distinct() 
 ```
 
 Algumas ocorrências foram tiradas por conta de diferenças em colunas.
@@ -98,7 +96,7 @@ Para identificar todos os valores únicos presentes nos dados, vamos aplicar a f
 lapply(dori_gbif1, unique)
 ```
 
-#Problemas não reportados
+# Problemas não reportados
 Processo de checagem mais fina que não é realizada pelo algoritmo devido sua limitação de programação. 
 
 Inicialmente, podemos verificar se as coordenadas são válidas (e.g., latitudes > 90 ou longitude > 180) utilizando funções dos pacotes CoordinateCleaner e bcd. Clicando nos links dos pacotes vocês podem checar diversas outras funcionalidades oferecidas.
