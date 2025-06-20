@@ -1,1 +1,1 @@
-O trabalho final encontra-se na pasta "docs" no arquivo index.html.
+O trabalho final encontra-se na pasta "docs" no arquivo index.html, junto aos seus respectivos arquivos de script do R e R markdown. Também é possível acessar pelo link https://annacmonteiro.github.io/CienciaColab/
